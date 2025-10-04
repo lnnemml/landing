@@ -30,8 +30,7 @@ const statusMsg = document.getElementById('lead-status');
 if (leadForm) {
   leadForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const email = document.getElementById('lead-email').value;
-
+    const email = document.getElementById('lead-email').value.trim();
     statusMsg.textContent = 'Sending...';
 
     try {
@@ -41,16 +40,17 @@ if (leadForm) {
         body: JSON.stringify({ email }),
       });
 
-      const data = await res.json();
-      if (data.success) {
-        statusMsg.textContent = '✓ Sent! Check your inbox soon.';
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.ok) {
+        statusMsg.textContent = '✓ Sent! Check inbox soon.';
         leadForm.reset();
       } else {
-        throw new Error(data.error || 'Unknown error');
+        statusMsg.textContent = `Error: ${data?.error || res.status}`;
       }
     } catch (err) {
-      statusMsg.textContent = 'Something went wrong. Try again later.';
       console.error('[LEAD_FORM_ERROR]', err);
+      statusMsg.textContent = 'Network error. Try again.';
     }
   });
 }
