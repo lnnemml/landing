@@ -955,19 +955,27 @@
      <p class="text-muted mb-2">
       Still deciding?
      </p>
-     <section class="section section--alt">
+     <section class="section section--alt" id="lead">
   <div class="container text-center">
-    <h2>Get the Research Brief</h2>
+    <h2>Not ready to order?</h2>
     <p class="text-muted" style="max-width: 640px; margin: 0 auto 24px;">
-      Download the COA + summary of how ISRIB A15 works, and decide when you're ready.
+      Leave your email and we’ll send you the COA and research explanation.
     </p>
-    <form action="https://formspree.io/f/YOUR_ID" method="POST" class="lead-form">
-      <input type="email" name="email" required placeholder="Your email" class="input-email" />
-      <button type="submit" class="btn btn--primary">Send Me the Brief</button>
+    <form id="lead-form" class="lead-form">
+      <input
+        type="email"
+        name="email"
+        id="lead-email"
+        class="input-email"
+        required
+        placeholder="Your email"
+      />
+      <button type="submit" class="btn btn--primary">Send Info</button>
     </form>
-    <p class="micro" style="margin-top: 10px;">We’ll send you 1 email with the info. No spam. No tracking.</p>
+    <p class="micro" id="lead-status" style="margin-top: 10px;"></p>
   </div>
 </section>
+
 
     </div>
    </div>
