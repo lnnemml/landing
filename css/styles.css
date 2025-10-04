@@ -769,4 +769,22 @@
   box-shadow: 0 0 0 2px rgba(92, 167, 255, 0.3);
 }
 
+@media (max-width: 768px){
+  .sticky-cta{
+    position: fixed; left: 0; right: 0; bottom: 12px;
+    display: flex; justify-content: center; z-index: 999;
+    pointer-events: none; /* щоб клікали лише по кнопці */
+  }
+  .sticky-cta .btn{
+    pointer-events: auto;
+    width: calc(100% - 2rem);
+  }
+}
+.nav-toggle{display:none;background:transparent;border:1px solid var(--color-border);color:var(--color-text-primary);font-size:1.25rem;padding:.5rem .75rem;border-radius:8px;cursor:pointer}
+@media (max-width:768px){
+  .nav-toggle{display:inline-flex;align-items:center;justify-content:center}
+  .nav-links{position:absolute;right:1rem;top:64px;background:rgba(15,23,42,.98);border:1px solid var(--color-border);border-radius:12px;padding:1rem;width:calc(100% - 2rem);display:none;flex-direction:column;gap:1rem}
+  .nav-links.open{display:flex}
+}
+
     
