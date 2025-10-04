@@ -787,4 +787,74 @@
   .nav-links.open{display:flex}
 }
 
-    
+ /* --- Mobile header: center Order Now, burger to the right --- */
+@media (max-width: 768px){
+  .nav-container{
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* brand | center | burger */
+    align-items: center;
+    gap: .5rem;
+  }
+  .nav-brand{ grid-column: 1; }
+  .nav-cta{ 
+    grid-column: 2; 
+    justify-self: center; 
+    /* робимо кнопку більш «натискабельною» на мобільних */
+    min-height: 44px;
+    padding: .625rem 1.25rem;
+  }
+  .nav-toggle{ 
+    grid-column: 3; 
+    justify-self: end; 
+  }
+
+  /* меню як дропдаун – залишається як у тебе, просто уточню: */
+  .nav-links{
+    position: absolute;
+    right: 1rem;
+    top: 64px;
+    background: rgba(15,23,42,.98);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1rem;
+    width: calc(100% - 2rem);
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .nav-links.open{ display: flex; }
+}
+
+/* --- Responsive compare table --- */
+.table-container{
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* плавний скрол на iOS */
+  max-width: 100%;
+}
+
+.table-container table{
+  min-width: 640px; /* щоб колонки не ламались у вузький стовпчик */
+}
+
+/* На дуже вузьких — «повний екран», без зайвих полів з боків */
+@media (max-width: 480px){
+  .table-container{
+    padding: 1rem;
+    margin-left: -1rem;   /* компенсуємо .container padding */
+    margin-right: -1rem;  /* щоб не було обрізу праворуч */
+    border-radius: 0;     /* без обрізаних кутів під час скролу */
+  }
+}
+
+/* Підказка про скрол на мобільних */
+@media (max-width: 768px){
+  .table-container::after{
+    content: 'Swipe to compare →';
+    display: block;
+    text-align: right;
+    font-size: .8rem;
+    color: var(--color-text-muted);
+    margin-top: .5rem;
+  }
+}
+
