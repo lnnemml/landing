@@ -1,0 +1,9 @@
+{
+  "name": "isrib-landing",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "resend": "^3.4.0"
+  }
+}
