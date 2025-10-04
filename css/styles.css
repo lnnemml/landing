@@ -902,6 +902,7 @@
   width: 32px;
   height: 32px;
   object-fit: contain;
+  margin-top: 2px;
 }
 .brand-name {
   font-weight: 800;
