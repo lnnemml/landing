@@ -741,4 +741,31 @@
   margin-top: 2px;
 }
 
+.lead-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.input-email {
+  flex: 1 1 220px;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  color: #111;
+  font-size: 16px;
+  font-family: inherit;
+}
+
+.input-email:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 2px rgba(92, 167, 255, 0.3);
+}
+
     
