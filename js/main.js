@@ -23,3 +23,34 @@ document.querySelectorAll(".cta-btn").forEach(button => {
     }
   });
 });
+// Lead form submission
+const leadForm = document.getElementById('lead-form');
+const statusMsg = document.getElementById('lead-status');
+
+if (leadForm) {
+  leadForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('lead-email').value;
+
+    statusMsg.textContent = 'Sending...';
+
+    try {
+      const res = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        statusMsg.textContent = '✓ Sent! Check your inbox soon.';
+        leadForm.reset();
+      } else {
+        throw new Error(data.error || 'Unknown error');
+      }
+    } catch (err) {
+      statusMsg.textContent = 'Something went wrong. Try again later.';
+      console.error('[LEAD_FORM_ERROR]', err);
+    }
+  });
+}
