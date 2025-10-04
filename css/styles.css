@@ -884,14 +884,9 @@
 }
 
 
-/* Full-bleed scrollable table on mobile */
+.table-container{ overflow-x: auto; max-width: 100%; }
+.table-container table{ min-width: 640px; }
 @media (max-width: 480px){
-  .table-container{
-    width: 100vw;                /* на всю ширину екрана */
-    margin-left: 50%;
-    transform: translateX(-50%); /* центруємо відносно вьюпорту */
-    border-radius: 0;
-    padding: 1rem;
-    -webkit-overflow-scrolling: touch;
-  }
+  .table-container th, .table-container td{ padding: .75rem; font-size: .95rem; }
 }
+
