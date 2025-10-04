@@ -9,45 +9,36 @@
   <link href="css/styles.css" rel="stylesheet"/>
  </head>
  <body>
-  <!-- Navigation -->
-  <nav>
-   <div class="nav-container">
+<!-- Navigation -->
+<nav>
+  <div class="nav-container">
     <a class="nav-brand" href="#">
-     <div class="nav-logo">
-      A15
-     </div>
-     <span>
-      ISRIB A15
-     </span>
+      <div class="nav-logo">A15</div>
+      <span>ISRIB A15</span>
     </a>
-    <ul class="nav-links">
-     <li>
-      <a href="#mechanism">
-       How It Works
-      </a>
-     </li>
-     <li>
-      <a href="#proof">
-       Research
-      </a>
-     </li>
-     <li>
-      <a href="#reviews">
-       Reviews
-      </a>
-     </li>
-     <li>
-      <a href="#coa">
-       COA
-      </a>
-     </li>
+
+    <!-- Mobile menu toggle -->
+    <button
+      class="nav-toggle"
+      aria-expanded="false"
+      aria-controls="primary-nav"
+      aria-label="Toggle navigation"
+    >
+      ☰
+    </button>
+
+    <!-- Primary navigation -->
+    <ul class="nav-links" id="primary-nav">
+      <li><a href="#mechanism">How It Works</a></li>
+      <li><a href="#proof">Research</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#coa">COA</a></li>
     </ul>
-    <a class="nav-cta" href="#order">
-     Order Now
-    </a>
-   </div>
-  </nav>
-  <!-- Hero Section -->
+
+    <a class="nav-cta" href="#order">Order Now</a>
+  </div>
+</nav>
+
   <!-- Hero Section -->
   <section class="hero">
    <div class="hero-content">
