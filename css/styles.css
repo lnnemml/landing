@@ -890,3 +890,33 @@
   .table-container th, .table-container td{ padding: .75rem; font-size: .95rem; }
 }
 
+/* Brand logo in nav */
+.nav-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  text-decoration: none;
+  color: var(--color-text-primary);
+}
+.brand-mark {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+.brand-name {
+  font-weight: 800;
+  letter-spacing: .2px;
+  line-height: 1;
+}
+@media (max-width: 768px) {
+  .nav-container {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: "brand cta toggle";
+    align-items: center;
+    gap: .5rem;
+  }
+  .nav-brand   { grid-area: brand; }
+  .nav-cta     { grid-area: cta; justify-self: center; min-height: 44px; }
+  .nav-toggle  { grid-area: toggle; justify-self: end; }
+}
