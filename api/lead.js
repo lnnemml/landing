@@ -16,11 +16,12 @@ export default async function handler(req, res) {
 
   try {
     await resend.emails.send({
-      from: 'lead@isrib.shop',
-      to: 'lnnemml@gmail.com', // ← на цей email будуть надходити всі ліди
-      subject: '🧠 Новий лід з ISRIB-лендінгу',
-      html: `<p>Нова заявка на отримання COA/інфо:</p><p><strong>Email:</strong> ${email}</p>`,
-    });
+  from: process.env.RESEND_FROM,
+  to: process.env.RESEND_TO,
+  subject: '🧠 Новий лід з ISRIB-лендінгу',
+  html: `<p>Нова заявка: <strong>${email}</strong></p>`,
+});
+
 
     return res.status(200).json({ success: true });
   } catch (error) {
