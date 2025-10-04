@@ -54,3 +54,22 @@ if (leadForm) {
     }
   });
 }
+
+// Hide sticky CTA when order section is in view
+const sticky = document.getElementById('sticky-cta');
+const order  = document.getElementById('order');
+if (sticky && order){
+  const io = new IntersectionObserver(([e]) => {
+    sticky.style.display = e.isIntersecting ? 'none' : 'flex';
+  }, { threshold: 0.2 });
+  io.observe(order);
+}
+
+const navToggle = document.querySelector('.nav-toggle');
+const navLinks  = document.getElementById('primary-nav');
+if (navToggle && navLinks){
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+}
