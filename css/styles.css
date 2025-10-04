@@ -721,4 +721,24 @@
         .justify-center { justify-content: center; }
         .gap-1 { gap: 0.5rem; }
         .gap-2 { gap: 1rem; }
+
+         /* Center the "What You Get" list */
+.what-you-get-list{
+  max-width: 720px;   /* щоб текст не розтікався на всю ширину */
+  margin: 0 auto;     /* центрує контейнер у картці */
+}
+
+.what-you-get-list .pricing-feature{
+  justify-content: center;   /* центрує іконку + текст як flex-рядок */
+}
+
+.what-you-get-list .pricing-feature > div{
+  text-align: center;        /* центрує заголовок і підпис */
+}
+
+/* (необов’язково) трохи підняти “галочку”, щоб вирівняти з заголовком */
+.what-you-get-list .pricing-feature .text-success{
+  margin-top: 2px;
+}
+
     
