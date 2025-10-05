@@ -86,3 +86,16 @@ if (navToggle && navLinks){
     navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
 }
+
+// Track button click without interrupting native navigation (autodecorate enabled)
+const buyBtn = document.querySelector('.pricing-cta .btn.btn-primary');
+if (buyBtn) {
+  buyBtn.addEventListener('click', () => {
+    if (typeof gtag === 'function') {
+      gtag('event', 'go_to_main_site', {
+        event_category: 'Navigation',
+        event_label: 'From Landing to Main Site'
+      });
+    }
+  }, { passive: true });
+}
