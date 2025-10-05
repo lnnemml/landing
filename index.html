@@ -7,6 +7,23 @@
    ISRIB A15 - Stop The Mental Noise
   </title>
   <link href="css/styles.css" rel="stylesheet"/>
+
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DV41FBCRCM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DV41FBCRCM');
+  // 🔻 custom page_view 
+  gtag('event', 'page_view', {
+    page_title: document.title,
+    page_location: window.location.href,
+    page_path: window.location.pathname
+  });
+</script>
+  
  </head>
  <body>
 <!-- Navigation -->
@@ -943,7 +960,10 @@
       </div>
      </div>
      <div class="pricing-cta">
-      <a class="btn btn-primary" href="https://dev.isrib.shop/product_isrib_A15.html" style="width: 100%;">
+      <a class="btn btn-primary" href="https://dev.isrib.shop/product_isrib_A15.html" style="width: 100%;"  onclick="gtag('event', 'go_to_main_site', {
+  event_category: 'Navigation',
+  event_label: 'From Landing to Main Site'
+})">
        Order ISRIB A15 Now
       </a>
      </div>
