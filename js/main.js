@@ -73,3 +73,30 @@ if (navToggle && navLinks){
     navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
 }
+
+  (function(){
+    const link = document.querySelector('.pricing-cta .btn.btn-primary');
+    if (!link) return;
+
+    link.addEventListener('click', function(e){
+      if (typeof gtag === 'function') {
+        e.preventDefault();
+        const url = this.href;
+
+        let navigated = false;
+        const go = () => { if (!navigated) { navigated = true; window.location.href = url; } };
+
+        gtag('event', 'go_to_main_site', {
+          event_category: 'Navigation',
+          event_label: 'From Landing to Main Site',
+          transport_type: 'beacon',
+          event_callback: go
+        });
+
+        // Фолбек на випадок, якщо callback не спрацює
+        setTimeout(go, 1000);
+      }
+    });
+  })();
+
+
