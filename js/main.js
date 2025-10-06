@@ -11,6 +11,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 /* ================== GA: CTA "See COA" ==================== */
+/* Додайте клас .cta-btn у HTML на ті кнопки, які хочете логувати */
 document.querySelectorAll(".cta-btn").forEach(button => {
   button.addEventListener("click", () => {
     if (typeof gtag === "function") {
@@ -24,6 +25,7 @@ document.querySelectorAll(".cta-btn").forEach(button => {
 });
 
 /* ====== Order button: fast redirect + GA + _gl linker ====== */
+/* Працює для головного CTA в секції ціни (.pricing-cta .btn.btn-primary) */
 (function wireOrderCta() {
   const buyBtn = document.querySelector('.pricing-cta .btn.btn-primary');
   if (!buyBtn) return;
@@ -69,38 +71,85 @@ document.querySelectorAll(".cta-btn").forEach(button => {
   });
 })();
 
+/* ===== (Optional) Додатковий лог на головний order-CTA за ID ===== */
+/* Якщо додаси id="order-primary-cta" у <a ...> на кнопці замовлення */
+(function wireOrderIdLog() {
+  const orderPrimary = document.getElementById('order-primary-cta');
+  if (!orderPrimary) return;
+  orderPrimary.addEventListener('click', () => {
+    if (typeof gtag === 'function') {
+      gtag('event', 'order_cta_click', {
+        event_category: 'engagement',
+        event_label: 'order_section_primary'
+      });
+    }
+  }, { passive: true });
+})();
+
 /* ================= Lead form (optional) ================== */
+/* HTML: <form id="lead-form">…<input id="lead-email">…<span id="lead-status"></span> */
 const leadForm = document.getElementById('lead-form');
 const statusMsg = document.getElementById('lead-status');
 
 if (leadForm) {
   leadForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const email = document.getElementById('lead-email').value.trim();
+    const emailInput = document.getElementById('lead-email');
+    const email = (emailInput?.value || '').trim();
     if (statusMsg) statusMsg.textContent = 'Sending...';
+    if (emailInput) emailInput.disabled = true;
 
     try {
       const res = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        // ⚠️ Жодних PII у GA: email тут лише для бекенду
         body: JSON.stringify({ email }),
       });
       const data = await res.json().catch(() => ({}));
 
       if (res.ok && data.ok) {
+        if (typeof gtag === 'function') {
+          gtag('event', 'lead_submit', {
+            form_id: 'lead-form',
+            method: 'landing_lead',
+            status: 'success'
+          });
+        }
         if (statusMsg) statusMsg.textContent = '✓ Sent! Check inbox soon.';
         leadForm.reset();
       } else {
+        if (typeof gtag === 'function') {
+          gtag('event', 'lead_submit', {
+            form_id: 'lead-form',
+            method: 'landing_lead',
+            status: 'error',
+            http_status: res.status
+          });
+        }
         if (statusMsg) statusMsg.textContent = `Error: ${data?.error || res.status}`;
       }
     } catch (err) {
       console.error('[LEAD_FORM_ERROR]', err);
+      if (typeof gtag === 'function') {
+        gtag('event', 'lead_submit', {
+          form_id: 'lead-form',
+          method: 'landing_lead',
+          status: 'network_error'
+        });
+      }
       if (statusMsg) statusMsg.textContent = 'Network error. Try again.';
+    } finally {
+      if (emailInput) emailInput.disabled = false;
     }
   });
 }
 
 /* ===== Sticky CTA hide when #order is visible (optional) ===== */
+/* HTML (якщо хочеш): 
+<div id="sticky-cta" class="sticky-cta" style="display:none;">
+  <a class="btn btn-primary" href="#order">Order ISRIB A15</a>
+</div> */
 const sticky = document.getElementById('sticky-cta');
 const order  = document.getElementById('order');
 if (sticky && order){
@@ -111,6 +160,8 @@ if (sticky && order){
 }
 
 /* ================= Mobile nav toggle (optional) ================= */
+/* HTML: <button class="nav-toggle" aria-expanded="false">…</button>
+         <nav id="primary-nav">…</nav> */
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks  = document.getElementById('primary-nav');
 if (navToggle && navLinks){
