@@ -145,6 +145,30 @@ if (leadForm) {
   });
 }
 
+// === Hero CTA click ===
+document.querySelectorAll('.hero-ctas .btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (typeof gtag === 'function') {
+      gtag('event', 'view_hero_cta', {
+        event_category: 'Engagement',
+        event_label: btn.textContent.trim()
+      });
+    }
+  });
+});
+
+// === Scroll depth 50% ===
+let scrolled = false;
+window.addEventListener('scroll', () => {
+  if (!scrolled && window.scrollY > (document.body.scrollHeight / 2)) {
+    scrolled = true;
+    if (typeof gtag === 'function') {
+      gtag('event', 'scroll_50', { event_category: 'Engagement' });
+    }
+  }
+});
+
+
 /* ===== Sticky CTA hide when #order is visible (optional) ===== */
 /* HTML (якщо хочеш): 
 <div id="sticky-cta" class="sticky-cta" style="display:none;">
