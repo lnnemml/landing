@@ -930,3 +930,13 @@
   .nav-cta     { grid-area: cta; justify-self: center; min-height: 44px; }
   .nav-toggle  { grid-area: toggle; justify-self: end; }
 }
+
+.card, .section-header, .callout {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+.card.visible, .section-header.visible, .callout.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
