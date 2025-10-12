@@ -213,3 +213,13 @@ if (navToggle && navLinks){
     navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
 }
+
+// Fade-in on scroll
+const faders = document.querySelectorAll('.card, .section-header, .callout');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.15 });
+
+faders.forEach(el => observer.observe(el));
