@@ -169,19 +169,38 @@ window.addEventListener('scroll', () => {
 });
 
 
-/* ===== Sticky CTA hide when #order is visible (optional) ===== */
-/* HTML (якщо хочеш): 
-<div id="sticky-cta" class="sticky-cta" style="display:none;">
-  <a class="btn btn-primary" href="#order">Order ISRIB A15</a>
-</div> */
-const sticky = document.getElementById('sticky-cta');
-const order  = document.getElementById('order');
-if (sticky && order){
-  const io = new IntersectionObserver(([en]) => {
-    sticky.style.display = en.isIntersecting ? 'none' : 'flex';
+/* ===== Sticky CTA visibility ===== */
+/* Кнопка зʼявляється, коли секція #order не видима */
+const sticky = document.getElementById("sticky-cta");
+const order = document.getElementById("order");
+
+if (sticky && order) {
+  // Початковий стан: приховано
+  sticky.style.display = "none";
+  sticky.style.opacity = "0";
+  sticky.style.pointerEvents = "none";
+
+  const io = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      // #order видно → ховаємо кнопку
+      sticky.style.opacity = "0";
+      sticky.style.pointerEvents = "none";
+      setTimeout(() => {
+        sticky.style.display = "none";
+      }, 300);
+    } else {
+      // #order не видно → показуємо кнопку
+      sticky.style.display = "flex";
+      setTimeout(() => {
+        sticky.style.opacity = "1";
+        sticky.style.pointerEvents = "auto";
+      }, 50);
+    }
   }, { threshold: 0.2 });
+
   io.observe(order);
 }
+
 
 /* ================= Mobile nav toggle (optional) ================= */
 /* HTML: <button class="nav-toggle" aria-expanded="false">…</button>
